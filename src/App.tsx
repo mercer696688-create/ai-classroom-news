@@ -959,6 +959,17 @@ export default function App() {
     setState((previous) => ({ ...createInitialState(), autoListen: previous.autoListen }))
   }, [clearTransitions, stopRecognition, stopSpeech])
 
+  useEffect(() => {
+    if (operatorMode) return
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || stateRef.current.phase === 'welcome') return
+      event.preventDefault()
+      returnToWelcome()
+    }
+    window.addEventListener('keydown', handleEscape)
+    return () => window.removeEventListener('keydown', handleEscape)
+  }, [operatorMode, returnToWelcome])
+
   const returnToOpening = useCallback(() => {
     const interviewee: Interviewee = 'teacher'
     clearTransitions()

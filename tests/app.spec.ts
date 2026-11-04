@@ -777,6 +777,26 @@ test('welcome heading appears only on the opening screen', async ({ page }) => {
   await expect(welcomeTitle).toHaveCount(0)
 })
 
+test('Escape returns the public presentation to the opening screen', async ({ page }) => {
+  await page.addInitScript(() => {
+    HTMLMediaElement.prototype.play = function () {
+      window.setTimeout(() => this.onended?.(new Event('ended')), 10)
+      return Promise.resolve()
+    }
+    HTMLMediaElement.prototype.pause = () => undefined
+  })
+  await page.goto('/')
+  const stage = page.locator('.stage.fullscreen')
+  await stage.click()
+  await expect(page.getByRole('heading', { name: 'May I ask you three questions?' })).toBeVisible()
+  await stage.click()
+  await expect(page.getByRole('heading', { name: "What's your favorite subject?" })).toBeVisible()
+  await page.keyboard.press('Escape')
+  await expect(page.getByRole('heading', { name: 'Ready for the interview' })).toBeVisible()
+  await expect(page.getByText('WELCOME TO AI CLASSROOM NEWS', { exact: true })).toBeVisible()
+  await expect(page.locator('.caption-bar')).toContainText("Let's begin!")
+})
+
 test('projection stage fits common widescreen and short projector viewports', async ({ page }) => {
   for (const viewport of [{ width: 1920, height: 1080 }, { width: 1280, height: 720 }, { width: 900, height: 500 }]) {
     await page.setViewportSize(viewport)
