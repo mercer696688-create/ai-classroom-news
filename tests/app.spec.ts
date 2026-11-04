@@ -143,7 +143,10 @@ test('public stage runs independently with mouse controls and can restart after 
   await expect(page.getByRole('heading', { name: 'Preparing the report' })).toBeVisible({ timeout: 4_000 })
   await stage.click()
   await expect(page.getByRole('heading', { name: 'Thank you!', exact: true })).toBeVisible({ timeout: 4_000 })
-  await expect(page.locator('.report-lines.final-summary')).toContainText("Miss Wu's favorite subject is English.")
+  const finalSummary = page.locator('.report-lines.final-summary')
+  await expect(finalSummary).toContainText("Miss Wu's favorite subject is English.")
+  await expect(page.locator('.stage.final-layout')).toBeVisible()
+  await expect(finalSummary.locator('.report-keyword')).toHaveText(['English', 'fun', 'Chinese'])
   await stage.click()
   await expect(page.getByRole('heading', { name: 'Ready for the interview' })).toBeVisible()
 })
@@ -748,6 +751,74 @@ test('projection stage fits common widescreen and short projector viewports', as
     expect(geometry.presenter?.bottom).toBeLessThan(geometry.caption?.top ?? 0)
     expect(geometry.caption?.bottom).toBeLessThanOrEqual(geometry.stage?.bottom ?? 0)
   }
+})
+
+test('final summary layout stays inside fullscreen and embedded stage bounds', async ({ page }) => {
+  await page.addInitScript(() => {
+    HTMLMediaElement.prototype.play = function () {
+      window.setTimeout(() => this.onended?.(new Event('ended')), 10)
+      return Promise.resolve()
+    }
+    HTMLMediaElement.prototype.pause = () => undefined
+  })
+  for (const viewport of [
+    { width: 1440, height: 900 }, { width: 1101, height: 760 }, { width: 1100, height: 760 },
+    { width: 900, height: 500 }, { width: 844, height: 390 }, { width: 768, height: 1024 },
+    { width: 390, height: 844 }, { width: 320, height: 568 },
+  ]) {
+    await page.setViewportSize(viewport)
+    await page.goto('/')
+    const stage = page.locator('.stage.fullscreen')
+    for (const heading of ['May I ask you three questions?', "What's your favorite subject?", 'Why do you like it?', 'What other subjects do you like?', 'Preparing the report', 'Thank you!']) {
+      await stage.click({ position: { x: Math.max(20, viewport.width - 50), y: 60 } })
+      await expect(page.getByRole('heading', { name: heading, exact: true })).toBeAttached()
+    }
+    const geometry = await page.evaluate(() => {
+      const bounds = (selector: string) => {
+        const rect = document.querySelector(selector)?.getBoundingClientRect()
+        return rect && { top: rect.top, bottom: rect.bottom, left: rect.left, right: rect.right }
+      }
+      return {
+        copy: bounds('.stage-copy'), summary: bounds('.final-summary'), title: bounds('.stage-copy h1'), caption: bounds('.caption-bar'),
+        documentWidth: document.documentElement.scrollWidth, documentHeight: document.documentElement.scrollHeight,
+        viewportWidth: window.innerWidth, viewportHeight: window.innerHeight,
+      }
+    })
+    expect(geometry.documentWidth).toBeLessThanOrEqual(geometry.viewportWidth)
+    expect(geometry.documentHeight).toBeLessThanOrEqual(geometry.viewportHeight)
+    expect(geometry.copy?.left).toBeGreaterThanOrEqual(0)
+    expect(geometry.copy?.right).toBeLessThanOrEqual(geometry.viewportWidth)
+    expect(geometry.summary?.right).toBeLessThanOrEqual(geometry.viewportWidth)
+    expect(geometry.copy?.bottom).toBeLessThanOrEqual(geometry.caption?.top ?? 0)
+    expect(geometry.summary?.bottom).toBeLessThanOrEqual(geometry.caption?.top ?? 0)
+    expect(geometry.title?.bottom).toBeLessThanOrEqual(geometry.caption?.top ?? 0)
+  }
+
+  await page.setViewportSize({ width: 1440, height: 900 })
+  await page.goto('/?operator=1')
+  await page.evaluate(() => sessionStorage.setItem('ai-classroom-news', JSON.stringify({
+    phase: 'all-complete', currentInterviewee: 'teacher', questionIndex: 2, transcript: '', interimTranscript: '',
+    caption: 'Thank you for watching AI Classroom News.', warning: '', autoListen: true, speechSupported: true,
+    recognitionSupported: true, isPaused: false, isSpeaking: false, isRecognizing: false,
+    expectedValues: { teacher: ['English', 'fun', 'Chinese'] },
+    teacher: {
+      interviewee: 'teacher', completed: true,
+      reportLines: ['Hello, everyone.', "Miss Wu's favorite subject is English.", "She likes it because it's fun.", 'And she also likes Chinese.'],
+      answers: [
+        { transcript: 'English', value: 'English', approved: true },
+        { transcript: 'fun', value: 'fun', approved: true },
+        { transcript: 'Chinese', value: 'Chinese', approved: true },
+      ],
+    },
+  })))
+  await page.reload()
+  const embeddedGeometry = await page.evaluate(() => {
+    const stage = document.querySelector('.stage.embedded')?.getBoundingClientRect()
+    const copy = document.querySelector('.stage.embedded .stage-copy')?.getBoundingClientRect()
+    return { stage: stage && { left: stage.left, right: stage.right }, copy: copy && { left: copy.left, right: copy.right } }
+  })
+  expect(embeddedGeometry.copy?.left).toBeGreaterThanOrEqual(embeddedGeometry.stage?.left ?? 0)
+  expect(embeddedGeometry.copy?.right).toBeLessThanOrEqual(embeddedGeometry.stage?.right ?? 0)
 })
 
 
