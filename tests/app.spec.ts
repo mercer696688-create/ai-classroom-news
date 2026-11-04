@@ -113,6 +113,35 @@ test('opening question waits for Yes before starting question one', async ({ pag
   await expect(page.getByRole('heading', { name: "What's your favorite subject?" })).toBeVisible({ timeout: 4_000 })
 })
 
+test('question kicker shows its number and changes to answer while listening', async ({ page }) => {
+  await page.addInitScript(() => {
+    HTMLMediaElement.prototype.play = function () {
+      const delay = this.src.includes('/question-') ? 500 : 10
+      window.setTimeout(() => this.onended?.(new Event('ended')), delay)
+      return Promise.resolve()
+    }
+    HTMLMediaElement.prototype.pause = () => undefined
+  })
+  await page.goto('/')
+  const stage = page.locator('.stage.fullscreen')
+  await stage.click()
+  await expect(page.getByRole('heading', { name: 'May I ask you three questions?' })).toBeVisible()
+  await stage.click()
+  await expect(page.locator('.stage-kicker')).toHaveText('LIVE INTERVIEW')
+  await expect(page.getByRole('heading', { name: "What's your favorite subject?" })).toBeVisible()
+  await expect(page.locator('.stage-kicker')).toHaveText('QUESTION 1')
+  await expect(page.locator('.stage-kicker')).toHaveText('YOUR ANSWER', { timeout: 2_000 })
+  await stage.click()
+  await expect(page.locator('.stage-kicker')).toHaveText('YOUR ANSWER')
+  await expect(page.getByRole('heading', { name: 'Why do you like it?' })).toBeVisible({ timeout: 3_000 })
+  await expect(page.locator('.stage-kicker')).toHaveText('QUESTION 2')
+  await expect(page.locator('.stage-kicker')).toHaveText('YOUR ANSWER', { timeout: 2_000 })
+  await stage.click()
+  await expect(page.getByRole('heading', { name: 'What other subjects do you like?' })).toBeVisible({ timeout: 3_000 })
+  await expect(page.locator('.stage-kicker')).toHaveText('QUESTION 3')
+  await expect(page.locator('.stage-kicker')).toHaveText('YOUR ANSWER', { timeout: 2_000 })
+})
+
 test('public stage runs independently with mouse controls and can restart after completion', async ({ page }) => {
   await page.addInitScript(() => {
     HTMLMediaElement.prototype.play = function () {

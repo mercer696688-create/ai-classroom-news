@@ -1178,7 +1178,10 @@ function stageCopy(state: AppState) {
   if (state.phase === 'broadcasting') return { kicker: 'NEWS REPORT', title: 'Classroom News Report', header: 'Live report' }
   if (state.phase === 'round-complete') return { kicker: 'REPORT COMPLETE', title: 'Thank you', header: 'Complete' }
   if (state.phase === 'all-complete') return { kicker: 'AI CLASSROOM NEWS', title: 'Thank you!', header: 'Complete' }
-  return { kicker: state.isRecognizing ? 'YOUR ANSWER' : 'LIVE INTERVIEW', title: QUESTIONS[state.questionIndex], header: 'Question ' + (state.questionIndex + 1) }
+  const questionNumber = state.questionIndex + 1
+  const answering = state.phase === 'listening' || state.phase === 'needs-confirmation'
+  const askingQuestion = state.phase === 'asking' && state.caption === questionSpeech(state.questionIndex)
+  return { kicker: answering ? 'YOUR ANSWER' : askingQuestion ? 'QUESTION ' + questionNumber : 'LIVE INTERVIEW', title: QUESTIONS[state.questionIndex], header: 'Question ' + questionNumber }
 }
 
 function reportLineContent(line: string, highlightKeywords: boolean) {
