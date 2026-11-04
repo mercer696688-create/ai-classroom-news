@@ -1179,7 +1179,8 @@ function stageCopy(state: AppState) {
   if (state.phase === 'round-complete') return { kicker: 'REPORT COMPLETE', title: 'Thank you', header: 'Complete' }
   if (state.phase === 'all-complete') return { kicker: 'AI CLASSROOM NEWS', title: 'Thank you!', header: 'Complete' }
   const questionNumber = state.questionIndex + 1
-  const answering = state.phase === 'listening' || state.phase === 'needs-confirmation'
+  if (state.phase === 'needs-confirmation') return { kicker: 'QUESTION ' + questionNumber, title: QUESTIONS[state.questionIndex], header: 'Question ' + questionNumber }
+  const answering = state.phase === 'listening'
   const askingQuestion = state.phase === 'asking' && state.caption === questionSpeech(state.questionIndex)
   return { kicker: answering ? 'YOUR ANSWER' : askingQuestion ? 'QUESTION ' + questionNumber : 'LIVE INTERVIEW', title: QUESTIONS[state.questionIndex], header: 'Question ' + questionNumber }
 }
@@ -1212,7 +1213,7 @@ function Stage({ state, embedded = false, onNavigate }: { state: AppState; embed
   const copy = stageCopy(state)
   return (
     <section
-      className={'stage ' + (embedded ? 'embedded' : 'fullscreen') + (state.phase === 'all-complete' ? ' final-layout' : '')}
+      className={'stage ' + (embedded ? 'embedded' : 'fullscreen') + (state.phase === 'welcome' ? ' welcome-layout' : '') + (state.phase === 'all-complete' ? ' final-layout' : '')}
       onClick={(event) => { if (event.detail <= 1) onNavigate?.('next') }}
       onContextMenu={(event) => { event.preventDefault(); onNavigate?.('previous') }}
     >
@@ -1220,6 +1221,7 @@ function Stage({ state, embedded = false, onNavigate }: { state: AppState; embed
       <div className="stage-ambient ambient-one" /><div className="stage-ambient ambient-two" />
       <div className="stage-header"><div className="live-badge"><span />AI CLASSROOM NEWS</div><div>{sessionLabel()} · {copy.header}</div></div>
       <div className="stage-content">
+        {state.phase === 'welcome' && <div className="welcome-title">WELCOME TO AI CLASSROOM NEWS</div>}
         <div className={'robot-wrap performance-' + performance + (speaking ? ' speaking' : '')}>
           <div className="robot-scale">
             <div className="signal-ring ring-one" /><div className="signal-ring ring-two" />

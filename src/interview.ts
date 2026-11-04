@@ -27,7 +27,7 @@ export function createInitialState(): AppState {
     questionIndex: 0,
     transcript: '',
     interimTranscript: '',
-    caption: 'Welcome to AI Classroom News',
+    caption: "Let's begin!",
     warning: '',
     autoListen: true,
     speechSupported: typeof window !== 'undefined' && 'speechSynthesis' in window,

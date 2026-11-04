@@ -130,13 +130,16 @@ test('question kicker shows its number and changes to answer while listening', a
   await expect(page.getByRole('heading', { name: 'May I ask you three questions?' })).toBeVisible()
   await stage.click()
   await expect(page.locator('.stage-kicker')).toHaveText('LIVE INTERVIEW')
+  const standardKickerSize = await page.locator('.stage-kicker').evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize))
   await expect(page.getByRole('heading', { name: "What's your favorite subject?" })).toBeVisible()
   await expect(page.locator('.stage-kicker')).toHaveText('QUESTION 1')
   await expect(page.locator('.stage-kicker')).toHaveClass(/prominent/)
-  await expect.poll(() => page.locator('.stage-kicker').evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(16)
+  await expect.poll(() => page.locator('.stage-kicker').evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThan(standardKickerSize)
   await expect(page.locator('.stage-kicker')).toHaveText('YOUR ANSWER', { timeout: 2_000 })
+  await expect.poll(() => page.locator('.stage-kicker').evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThan(standardKickerSize)
   await stage.click()
-  await expect(page.locator('.stage-kicker')).toHaveText('YOUR ANSWER')
+  await expect(page.locator('.stage-kicker')).toHaveText('QUESTION 1')
+  await expect(page.locator('.stage-kicker')).not.toHaveText('YOUR ANSWER')
   await expect(page.getByRole('heading', { name: 'Why do you like it?' })).toBeVisible({ timeout: 3_000 })
   await expect(page.locator('.stage-kicker')).toHaveText('QUESTION 2')
   await expect(page.locator('.stage-kicker')).toHaveText('YOUR ANSWER', { timeout: 2_000 })
@@ -174,6 +177,8 @@ test('public stage runs independently with mouse controls and can restart after 
   await expect(page.getByRole('heading', { name: 'What other subjects do you like?' })).toBeVisible({ timeout: 4_000 })
   await stage.click()
   await expect(page.getByRole('heading', { name: 'Preparing the report' })).toBeVisible({ timeout: 4_000 })
+  await expect(page.locator('.stage-kicker')).toHaveText('ANSWER REVIEW')
+  await expect.poll(() => page.locator('.stage-kicker').evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(16)
   await stage.click()
   await expect(page.getByRole('heading', { name: 'Thank you!', exact: true })).toBeVisible({ timeout: 4_000 })
   const finalSummary = page.locator('.report-lines.final-summary')
@@ -242,6 +247,8 @@ test('left click during the report skips to Thank you while keeping the summary'
   await expect(page.getByRole('heading', { name: 'Preparing the report' })).toBeVisible()
   await stage.click()
   await expect(page.getByRole('heading', { name: 'Classroom News Report' })).toBeVisible()
+  await expect(page.locator('.stage-kicker')).toHaveText('NEWS REPORT')
+  await expect.poll(() => page.locator('.stage-kicker').evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(16)
   await stage.click()
   await expect(page.getByRole('heading', { name: 'Thank you!', exact: true })).toBeVisible()
   await expect(page.locator('.report-lines.final-summary')).toContainText('And she also likes Chinese.')
@@ -753,9 +760,21 @@ test('final transcript displays immediately but only microphone silence advances
 test('public stage remains readable on a narrow screen', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await page.goto('/')
+  await expect(page.getByText('WELCOME TO AI CLASSROOM NEWS', { exact: true })).toBeVisible()
+  await expect(page.locator('.caption-bar')).toContainText("Let's begin!")
   await expect(page.getByText('Ready for the interview')).toBeVisible()
   const widths = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth }))
   expect(widths.scroll).toBeLessThanOrEqual(widths.client)
+})
+
+test('welcome heading appears only on the opening screen', async ({ page }) => {
+  await page.goto('/')
+  const welcomeTitle = page.getByText('WELCOME TO AI CLASSROOM NEWS', { exact: true })
+  await expect(welcomeTitle).toBeVisible()
+  await expect(page.locator('.caption-bar')).toContainText("Let's begin!")
+  await page.locator('.stage.fullscreen').click()
+  await expect(page.getByRole('heading', { name: 'May I ask you three questions?' })).toBeVisible()
+  await expect(welcomeTitle).toHaveCount(0)
 })
 
 test('projection stage fits common widescreen and short projector viewports', async ({ page }) => {
@@ -764,6 +783,7 @@ test('projection stage fits common widescreen and short projector viewports', as
     await page.goto('/')
     await expect(page.locator('.ai-presenter')).toBeVisible()
     await expect(page.locator('.caption-bar')).toBeVisible()
+    await expect.poll(() => page.locator('.stage-kicker').evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(20)
     const geometry = await page.evaluate(() => {
       const presenter = document.querySelector('.ai-presenter')?.getBoundingClientRect()
       const caption = document.querySelector('.caption-bar')?.getBoundingClientRect()
@@ -806,6 +826,8 @@ test('final summary layout stays inside fullscreen and embedded stage bounds', a
       await stage.click({ position: { x: Math.max(20, viewport.width - 50), y: 60 } })
       await expect(page.getByRole('heading', { name: heading, exact: true })).toBeAttached()
     }
+    await expect(page.locator('.stage-kicker')).toHaveText('AI CLASSROOM NEWS')
+    await expect.poll(() => page.locator('.stage-kicker').evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(16)
     const geometry = await page.evaluate(() => {
       const bounds = (selector: string) => {
         const rect = document.querySelector(selector)?.getBoundingClientRect()
