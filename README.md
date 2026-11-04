@@ -2,6 +2,8 @@
 
 用于课堂演示的 AI 数字主持人采访程序。打开公共链接后，页面本身就是学生看到的演示画面；程序采访 Miss Wu 三个固定问题，并按固定英文模板播报。
 
+公共演示链接：https://mercer696688-create.github.io/ai-classroom-news/
+
 ## 启动
 
 1. 用 Microsoft Edge 或 Chrome 打开公共链接。
