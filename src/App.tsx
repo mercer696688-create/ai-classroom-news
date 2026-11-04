@@ -781,7 +781,7 @@ export default function App() {
       transcript: '',
       interimTranscript: '',
       warning: Recognition ? '' : '当前浏览器无法识别 Yes，请由工作人员点击确认。',
-      caption: 'Please answer, Yes.',
+      caption: introFor(previous.currentInterviewee),
     }))
     if (!Recognition) return
     const recognition = new Recognition()
@@ -1233,7 +1233,7 @@ function Stage({ state, embedded = false, onNavigate }: { state: AppState; embed
           {state.isRecognizing && <div className="listening-orbit"><Mic size={20} /><span>LISTENING</span></div>}
           <div className="performance-label"><span />{performance === 'listening' ? 'Listening carefully' : performance === 'waiting' ? 'Waiting for Miss Wu' : performance === 'reporting' ? 'News presenter mode' : performance === 'presenting' ? 'Speaking to Miss Wu' : performance === 'thinking' ? 'Preparing the report' : performance === 'thanking' ? 'Thank you' : 'Ready'}</div>
         </div>
-        <div className="stage-copy"><span className="stage-kicker">{copy.kicker}</span><h1>{copy.title}</h1>{['broadcasting', 'review', 'round-complete', 'all-complete'].includes(state.phase) && reportLines.length > 0 && <div className={'report-lines ' + (state.phase === 'all-complete' ? 'final-summary' : '')}>{reportLines.map((line) => <p className={line === state.caption ? 'active' : ''} key={line}>{reportLineContent(line, state.phase === 'all-complete')}</p>)}</div>}{state.isRecognizing && <div className="sound-wave">{Array.from({ length: 18 }).map((_, index) => <span key={index} />)}</div>}</div>
+        <div className="stage-copy"><span className={'stage-kicker' + (/^(QUESTION [123]|YOUR ANSWER)$/.test(copy.kicker) ? ' prominent' : '')}>{copy.kicker}</span><h1>{copy.title}</h1>{['broadcasting', 'review', 'round-complete', 'all-complete'].includes(state.phase) && reportLines.length > 0 && <div className={'report-lines ' + (state.phase === 'all-complete' ? 'final-summary' : '')}>{reportLines.map((line) => <p className={line === state.caption ? 'active' : ''} key={line}>{reportLineContent(line, state.phase === 'all-complete')}</p>)}</div>}{state.isRecognizing && <div className="sound-wave">{Array.from({ length: 18 }).map((_, index) => <span key={index} />)}</div>}</div>
       </div>
       <div className="caption-bar" role="status" aria-live="polite"><span className="caption-label">AI</span><p>{state.caption}</p></div>
     </section>
