@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <radialGradient id="background" cx="50%" cy="38%" r="78%">
+      <stop offset="0" stop-color="#183653"/>
+      <stop offset="0.52" stop-color="#091a2d"/>
+      <stop offset="1" stop-color="#030912"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="45%" r="55%">
+      <stop offset="0" stop-color="#6ce5ff" stop-opacity=".24"/>
+      <stop offset=".58" stop-color="#7178ff" stop-opacity=".09"/>
+      <stop offset="1" stop-color="#101d35" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#80604f"/>
+      <stop offset=".18" stop-color="#493329"/>
+      <stop offset=".55" stop-color="#241713"/>
+      <stop offset="1" stop-color="#100a0a"/>
+    </linearGradient>
+    <linearGradient id="hairLight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c39475" stop-opacity=".78"/>
+      <stop offset=".35" stop-color="#68483a" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#1a1010" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="skin" cx="42%" cy="28%" r="78%">
+      <stop offset="0" stop-color="#fff2e9"/>
+      <stop offset=".44" stop-color="#f4d0c2"/>
+      <stop offset=".78" stop-color="#d99b88"/>
+      <stop offset="1" stop-color="#b86f62"/>
+    </radialGradient>
+    <linearGradient id="neck" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c88778"/>
+      <stop offset=".45" stop-color="#efc0ae"/>
+      <stop offset="1" stop-color="#bb776a"/>
+    </linearGradient>
+    <linearGradient id="jacket" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#607eb4"/>
+      <stop offset=".45" stop-color="#334870"/>
+      <stop offset="1" stop-color="#151b38"/>
+    </linearGradient>
+    <linearGradient id="lapel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a2b9e4"/>
+      <stop offset=".45" stop-color="#5d76aa"/>
+      <stop offset="1" stop-color="#29365f"/>
+    </linearGradient>
+    <linearGradient id="blouse" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dcecf5"/>
+    </linearGradient>
+    <radialGradient id="iris" cx="36%" cy="32%" r="72%">
+      <stop offset="0" stop-color="#b88c67"/>
+      <stop offset=".48" stop-color="#6a4531"/>
+      <stop offset="1" stop-color="#1d1110"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="30" stdDeviation="28" flood-color="#00040a" flood-opacity=".62"/>
+    </filter>
+    <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="13" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="skinSoft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation=".55"/>
+    </filter>
+    <clipPath id="faceClip"><path d="M431 351C455 222 549 170 650 185c116 17 178 105 164 244l-9 139c-10 137-93 230-207 225-113-5-188-106-188-239z"/></clipPath>
+  </defs>
+
+  <rect width="1200" height="1200" rx="70" fill="url(#background)"/>
+  <ellipse cx="600" cy="560" rx="520" ry="490" fill="url(#halo)"/>
+  <path d="M120 280h160M920 280h160M120 920h160M920 920h160" stroke="#62daf1" stroke-opacity=".16" stroke-width="2"/>
+  <circle cx="600" cy="560" r="433" fill="none" stroke="#5fdcf5" stroke-opacity=".16" stroke-width="3"/>
+  <circle cx="600" cy="560" r="370" fill="none" stroke="#8182ff" stroke-opacity=".14" stroke-width="2" stroke-dasharray="8 20"/>
+  <ellipse cx="600" cy="1110" rx="342" ry="58" fill="#00040a" opacity=".6"/>
+
+  <g filter="url(#shadow)">
+    <!-- long layered brown hair -->
+    <path d="M362 459C339 250 455 104 620 110c185 6 292 157 244 388l-45 409c-17 143-79 226-173 235 51-132 46-276 5-397-20 10-39 14-58 14-19 0-38-4-57-12-47 118-54 261-7 394-101-18-165-111-178-253z" fill="url(#hair)"/>
+    <path d="M385 431c-46 178-18 388 88 586 24 45 61 66 95 48-82-163-85-361-29-525z" fill="#1d1111"/>
+    <path d="M839 425c51 190 22 401-87 598-25 45-65 62-98 42 84-164 87-365 27-533z" fill="#170e0f"/>
+    <path d="M388 365c39-132 137-221 253-222 108-1 190 58 229 172-109-67-247-88-372-13-48 29-81 56-110 63z" fill="url(#hairLight)" opacity=".72"/>
+
+    <!-- shoulders and presenter clothing -->
+    <path d="M254 1140c22-216 123-329 294-372h104c171 42 272 155 294 372z" fill="url(#jacket)" stroke="#8ddff5" stroke-opacity=".33" stroke-width="3"/>
+    <path d="M508 776h185l54 364H454z" fill="url(#blouse)"/>
+    <path d="M450 813l109-45 40 126-92 103-91-116z" fill="url(#lapel)"/>
+    <path d="M750 813l-109-45-40 126 92 103 91-116z" fill="url(#lapel)"/>
+    <path d="M529 785l70 89 72-89-22 164h-99z" fill="#f7fcff"/>
+    <path d="M297 1139c12-158 69-254 153-297l70 298zM903 1139c-12-158-69-254-153-297l-70 298z" fill="#2b3b66" opacity=".88"/>
+
+    <!-- neck -->
+    <path d="M532 699h135v111c-18 43-113 43-135 0z" fill="url(#neck)"/>
+    <path d="M536 711c35 24 91 24 127 0v33c-34 29-95 30-127 1z" fill="#a9675d" opacity=".16"/>
+
+    <!-- ears -->
+    <ellipse cx="421" cy="489" rx="34" ry="60" fill="#d99a88"/>
+    <ellipse cx="805" cy="489" rx="34" ry="60" fill="#c98577"/>
+    <path d="M420 477c-15 9-15 30-1 39" fill="none" stroke="#a9635d" stroke-width="5" stroke-linecap="round"/>
+    <path d="M806 477c15 9 15 30 1 39" fill="none" stroke="#a9635d" stroke-width="5" stroke-linecap="round"/>
+    <path d="M421 545v37M805 545v37" stroke="#a8eaff" stroke-width="3"/>
+    <circle cx="421" cy="590" r="9" fill="#c5f7ff" stroke="#75dff7" stroke-width="3" filter="url(#softGlow)"/>
+    <circle cx="805" cy="590" r="9" fill="#d8d2ff" stroke="#9e95ff" stroke-width="3" filter="url(#softGlow)"/>
+
+    <!-- refined oval face -->
+    <path d="M431 351C455 222 549 170 650 185c116 17 178 105 164 244l-9 139c-10 137-93 230-207 225-113-5-188-106-188-239z" fill="url(#skin)" stroke="#ffe9dd" stroke-opacity=".58" stroke-width="4" filter="url(#skinSoft)"/>
+    <g clip-path="url(#faceClip)">
+      <ellipse cx="512" cy="443" rx="112" ry="178" fill="#fff4ec" opacity=".12"/>
+      <ellipse cx="764" cy="518" rx="83" ry="208" fill="#8c433d" opacity=".08"/>
+      <ellipse cx="510" cy="604" rx="63" ry="28" fill="#ed8791" opacity=".18"/>
+      <ellipse cx="725" cy="604" rx="63" ry="28" fill="#ed8791" opacity=".16"/>
+    </g>
+
+    <!-- natural side-parted fringe -->
+    <path d="M401 399c3-171 102-286 244-283 127 3 220 87 236 219-63-53-133-80-218-81-62-1-118 16-168 48-34 21-63 53-94 97z" fill="url(#hair)"/>
+    <path d="M476 332c40-117 138-184 246-167-71 22-139 67-176 131-29 49-66 83-121 104 20-32 35-51 51-68z" fill="url(#hairLight)" opacity=".72"/>
+    <path d="M714 172c97 25 159 94 168 194-43-41-85-68-136-83-6-44-16-81-32-111z" fill="#160e0e" opacity=".76"/>
+    <path d="M422 378c-39 85-36 181-6 258 13-101 29-171 66-237z" fill="#2b1b18"/>
+    <path d="M805 338c45 97 43 202 7 303-8-123-30-201-67-278z" fill="#1b1111"/>
+
+    <!-- brows -->
+    <path d="M483 435c42-25 87-23 123 3" fill="none" stroke="#4e342f" stroke-width="10" stroke-linecap="round"/>
+    <path d="M657 439c39-26 83-27 119-4" fill="none" stroke="#4e342f" stroke-width="10" stroke-linecap="round"/>
+    <path d="M487 432c34-17 73-19 108-3" fill="none" stroke="#a37968" stroke-opacity=".42" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- almond-shaped eyes and lashes -->
+    <path d="M474 490c29-37 95-41 133-2-34 31-94 33-133 2z" fill="#fffafa"/>
+    <path d="M653 490c34-37 97-35 129 3-37 29-93 28-129-3z" fill="#fffafa"/>
+    <path d="M473 488c35-35 95-37 134 0M652 488c38-35 96-33 131 5" fill="none" stroke="#442d2e" stroke-width="7" stroke-linecap="round"/>
+    <path d="M479 479l-18-15M486 473l-11-20M774 478l17-15M767 472l11-20" stroke="#3a272a" stroke-width="5" stroke-linecap="round"/>
+    <ellipse cx="546" cy="489" rx="27" ry="31" fill="url(#iris)"/>
+    <ellipse cx="710" cy="490" rx="27" ry="31" fill="url(#iris)"/>
+    <ellipse cx="547" cy="491" rx="13" ry="19" fill="#100b0b"/>
+    <ellipse cx="710" cy="492" rx="13" ry="19" fill="#100b0b"/>
+    <circle cx="536" cy="478" r="8" fill="#ffffff"/>
+    <circle cx="700" cy="479" r="8" fill="#ffffff"/>
+    <circle cx="554" cy="503" r="4" fill="#e9d9c8" opacity=".76"/>
+    <circle cx="717" cy="504" r="4" fill="#e9d9c8" opacity=".76"/>
+    <path d="M481 511c31 13 85 12 118-3M659 510c31 13 82 13 114-1" fill="none" stroke="#b27f77" stroke-opacity=".42" stroke-width="3"/>
+
+    <!-- nose and subtle makeup -->
+    <path d="M623 494c-2 38-9 70-25 91 15 11 36 12 52 0" fill="none" stroke="#bd7c70" stroke-width="6" stroke-linecap="round"/>
+    <path d="M608 582c11 5 28 5 39 0" fill="none" stroke="#f6c4b3" stroke-opacity=".72" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- natural soft smile -->
+    <path d="M561 631c33-22 83-22 117 1-31 39-84 44-117-1z" fill="#a95762"/>
+    <path d="M568 633c31 12 70 13 103 1-26 10-74 12-103-1z" fill="#f9d6cf"/>
+    <path d="M579 653c24 13 54 13 78 0-21 25-59 27-78 0z" fill="#d47d85"/>
+    <path d="M565 629c32-17 79-18 111 0" fill="none" stroke="#6c343e" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- gentle AI identity details -->
+    <path d="M832 359l14 7 14-7 7 14-7 14-14 7-14-7-7-14z" fill="#88eafc" fill-opacity=".72" stroke="#dcfbff" stroke-width="2" filter="url(#softGlow)"/>
+    <circle cx="601" cy="1009" r="45" fill="#102d4b" stroke="#7be8fb" stroke-width="4" filter="url(#softGlow)"/>
+    <path d="M579 1008l15 15 30-32" fill="none" stroke="#c7fbff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="601" cy="1009" r="33" fill="none" stroke="#8182ff" stroke-opacity=".55" stroke-width="2"/>
+  </g>
+
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="78" y="92" fill="#dffaff" font-size="24" font-weight="700" letter-spacing="4">AI CLASSROOM PRESENTER</text>
+    <text x="80" y="130" fill="#7fa3b7" font-size="19">Concept V2 · semi-realistic, warm and approachable</text>
+    <g transform="translate(864 94)">
+      <rect width="250" height="45" rx="22" fill="#0c2235" stroke="#335d73"/>
+      <circle cx="25" cy="22.5" r="6" fill="#68e8be" filter="url(#softGlow)"/>
+      <text x="44" y="29" fill="#9ad6e4" font-size="16" letter-spacing="2">PRESENTER MODE</text>
+    </g>
+  </g>
+</svg>

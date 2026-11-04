@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="34%" r="78%">
+      <stop offset="0" stop-color="#fff9ff"/>
+      <stop offset=".45" stop-color="#eef5ff"/>
+      <stop offset="1" stop-color="#cadcf3"/>
+    </radialGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8d6a56"/>
+      <stop offset=".28" stop-color="#5b4035"/>
+      <stop offset=".68" stop-color="#30201d"/>
+      <stop offset="1" stop-color="#160e10"/>
+    </linearGradient>
+    <linearGradient id="hairShine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e1b494" stop-opacity=".8"/>
+      <stop offset=".55" stop-color="#98705b" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="skin" cx="43%" cy="26%" r="78%">
+      <stop offset="0" stop-color="#fffaf7"/>
+      <stop offset=".42" stop-color="#fbe3d9"/>
+      <stop offset=".78" stop-color="#e8b7a7"/>
+      <stop offset="1" stop-color="#ca8d80"/>
+    </radialGradient>
+    <linearGradient id="neck" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d79c8e"/>
+      <stop offset=".45" stop-color="#f5cbbc"/>
+      <stop offset="1" stop-color="#cf8f84"/>
+    </linearGradient>
+    <linearGradient id="jacket" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d9d8ff"/>
+      <stop offset=".48" stop-color="#aaa9e5"/>
+      <stop offset="1" stop-color="#716fae"/>
+    </linearGradient>
+    <linearGradient id="lapel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f5ff"/>
+      <stop offset="1" stop-color="#bfc2ee"/>
+    </linearGradient>
+    <radialGradient id="iris" cx="36%" cy="28%" r="70%">
+      <stop offset="0" stop-color="#d7b18c"/>
+      <stop offset=".45" stop-color="#8c5e45"/>
+      <stop offset="1" stop-color="#2b1716"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="28" stdDeviation="28" flood-color="#6d6a92" flood-opacity=".28"/>
+    </filter>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="11" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="1200" rx="70" fill="url(#bg)"/>
+  <circle cx="175" cy="185" r="115" fill="#f7d9ff" opacity=".34"/>
+  <circle cx="1020" cy="260" r="150" fill="#b9eaff" opacity=".28"/>
+  <circle cx="960" cy="970" r="190" fill="#d6d1ff" opacity=".24"/>
+  <path d="M110 310c140-120 275-121 405-7M690 212c146-69 276-50 390 58" fill="none" stroke="#ffffff" stroke-opacity=".55" stroke-width="3"/>
+  <ellipse cx="600" cy="1105" rx="320" ry="55" fill="#6b6b8b" opacity=".18"/>
+
+  <g filter="url(#shadow)">
+    <!-- soft long wavy hair -->
+    <path d="M360 482C328 259 439 99 605 96c179-3 301 147 264 384l-43 415c-12 139-76 222-174 247 49-143 41-276 1-397-18 8-38 12-59 12-20 0-40-4-58-12-47 122-55 256-10 399-102-23-164-112-177-250z" fill="url(#hair)"/>
+    <path d="M385 476c-39 169-12 361 69 537 23 50 57 74 90 59-62-165-60-346-8-502z" fill="#28181a"/>
+    <path d="M838 475c43 173 16 367-70 544-24 49-61 71-94 53 67-166 64-352 9-509z" fill="#211416"/>
+    <path d="M393 332c49-140 152-220 268-218 108 1 196 61 232 176-90-65-199-86-313-42-72 28-131 82-187 84z" fill="url(#hairShine)" opacity=".66"/>
+    <path d="M393 580c-33 164-9 337 65 494M806 576c37 164 11 338-68 499" fill="none" stroke="#ad7e65" stroke-opacity=".25" stroke-width="19" stroke-linecap="round"/>
+
+    <!-- pastel presenter outfit -->
+    <path d="M272 1140c22-207 121-315 284-358h88c164 43 263 151 284 358z" fill="url(#jacket)" stroke="#f7f6ff" stroke-width="4"/>
+    <path d="M510 788h180l47 352H463z" fill="#fff"/>
+    <path d="M455 824l105-44 41 120-91 103-91-111z" fill="url(#lapel)"/>
+    <path d="M745 824l-105-44-41 120 91 103 91-111z" fill="url(#lapel)"/>
+    <path d="M535 800l65 81 66-81-18 143h-95z" fill="#fff"/>
+    <path d="M319 1138c13-142 65-238 138-282l62 283zM881 1138c-13-142-65-238-138-282l-62 283z" fill="#9697d2" opacity=".82"/>
+
+    <!-- slim neck -->
+    <path d="M548 704h105v108c-19 35-87 35-105 0z" fill="url(#neck)"/>
+    <path d="M550 717c28 18 74 19 101 0v28c-26 22-75 23-101 1z" fill="#b8736c" opacity=".12"/>
+
+    <!-- ears and delicate earrings -->
+    <ellipse cx="431" cy="496" rx="29" ry="55" fill="#e7b2a4"/>
+    <ellipse cx="769" cy="496" rx="29" ry="55" fill="#d69b90"/>
+    <path d="M431 542v31M769 542v31" stroke="#a48bd6" stroke-width="3"/>
+    <path d="M431 578l8 13-8 13-8-13zM769 578l8 13-8 13-8-13z" fill="#e7e1ff" stroke="#9f96dd" stroke-width="2" filter="url(#glow)"/>
+
+    <!-- small oval face with pointed chin -->
+    <path d="M429 352C451 224 537 166 625 177c104 13 166 96 157 225l-7 151c-6 128-75 225-174 239-99-13-171-108-179-235z" fill="url(#skin)" stroke="#fff0e9" stroke-width="4"/>
+    <ellipse cx="508" cy="600" rx="52" ry="22" fill="#f18b9b" opacity=".18"/>
+    <ellipse cx="701" cy="600" rx="52" ry="22" fill="#f18b9b" opacity=".16"/>
+
+    <!-- natural side part, airy fringe -->
+    <path d="M392 402c2-177 104-297 245-294 126 3 219 87 237 218-79-59-169-80-264-50-82 26-147 80-218 126z" fill="url(#hair)"/>
+    <path d="M462 342c38-114 131-185 238-176-69 27-125 67-162 124-31 49-68 82-121 111 19-28 31-42 45-59z" fill="url(#hairShine)" opacity=".82"/>
+    <path d="M704 168c93 22 156 90 170 187-35-33-73-57-113-71-11-49-29-89-57-116z" fill="#231719" opacity=".73"/>
+    <path d="M412 382c-25 72-27 150-4 229 12-88 34-154 69-212z" fill="#3b2825"/>
+    <path d="M778 337c35 88 38 179 12 271-13-104-33-174-67-237z" fill="#2a1b1c"/>
+
+    <!-- soft curved brows -->
+    <path d="M487 433c38-21 79-20 111 2" fill="none" stroke="#654842" stroke-width="8" stroke-linecap="round"/>
+    <path d="M643 436c34-23 76-23 109-2" fill="none" stroke="#654842" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- sweet luminous eyes -->
+    <path d="M477 487c30-35 87-38 122-1-31 28-87 31-122 1z" fill="#fffdfd"/>
+    <path d="M638 488c33-35 88-33 119 3-33 27-85 26-119-3z" fill="#fffdfd"/>
+    <path d="M476 486c31-33 88-36 124 0M637 487c36-34 87-31 121 4" fill="none" stroke="#4b3335" stroke-width="6" stroke-linecap="round"/>
+    <path d="M481 477l-14-12M489 472l-8-17M751 478l14-12M744 472l8-17" stroke="#4a3235" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="542" cy="487" rx="25" ry="29" fill="url(#iris)"/>
+    <ellipse cx="697" cy="488" rx="25" ry="29" fill="url(#iris)"/>
+    <ellipse cx="542" cy="489" rx="12" ry="18" fill="#150c0d"/>
+    <ellipse cx="697" cy="490" rx="12" ry="18" fill="#150c0d"/>
+    <circle cx="533" cy="477" r="8" fill="#fff"/>
+    <circle cx="688" cy="478" r="8" fill="#fff"/>
+    <circle cx="550" cy="500" r="4" fill="#f2d6c2"/>
+    <circle cx="705" cy="501" r="4" fill="#f2d6c2"/>
+
+    <!-- petite nose -->
+    <path d="M608 501c-1 34-7 58-18 75 11 8 28 9 40 0" fill="none" stroke="#c9897d" stroke-width="5" stroke-linecap="round"/>
+    <path d="M598 574c8 4 21 4 29 0" fill="none" stroke="#fff0e7" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- small gentle smile -->
+    <path d="M558 624c28-18 67-18 95 1-25 31-69 35-95-1z" fill="#b65f72"/>
+    <path d="M565 626c25 9 56 10 81 1-22 8-59 9-81-1z" fill="#ffe7e3"/>
+    <path d="M573 642c19 11 46 11 65 0-17 20-49 22-65 0z" fill="#dc8797"/>
+    <path d="M561 622c27-14 65-15 90 1" fill="none" stroke="#7c3d4e" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- subtle AI detail only -->
+    <path d="M791 373c13-14 29-14 42 0-3 20-18 31-21 33-4-2-19-13-21-33z" fill="#c4f5ff" stroke="#83dcec" stroke-width="3" filter="url(#glow)"/>
+    <path d="M579 1018l21 18 22-18" fill="none" stroke="#7770bd" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="600" cy="1021" r="34" fill="none" stroke="#a9dff0" stroke-opacity=".6" stroke-width="2"/>
+  </g>
+
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="72" y="86" fill="#524f79" font-size="23" font-weight="750" letter-spacing="3.5">SWEET AI CLASSROOM HOST</text>
+    <text x="74" y="122" fill="#8582a6" font-size="18">Concept V3 · soft, youthful, friendly</text>
+    <g transform="translate(900 78)">
+      <rect width="225" height="43" rx="21" fill="#ffffff" fill-opacity=".62" stroke="#bbb9df"/>
+      <circle cx="24" cy="21.5" r="6" fill="#7bdcbf"/>
+      <text x="42" y="28" fill="#77749d" font-size="15" letter-spacing="1.5">CLASSROOM READY</text>
+    </g>
+  </g>
+</svg>
